@@ -1,6 +1,8 @@
 package com.example.demoservice;
 
 
+import com.example.demoservice.order.OrderLine;
+import com.example.demoservice.order.OrderLineRepository;
 import com.example.demoservice.product.Product;
 import com.example.demoservice.order.Order;
 import com.example.demoservice.user.User;
@@ -14,17 +16,21 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Slf4j
-public class LoadDatabase {
+public class DatabaseLoader {
     @Bean
-    CommandLineRunner initDatabase(UserRepository userRepository, OrderRepository orderRepository, ProductRepository productRepository) {
+    CommandLineRunner initDatabase(UserRepository userRepository, OrderRepository orderRepository,
+                                   ProductRepository productRepository, OrderLineRepository orderLineRepository) {
         return args -> {
             log.info("Preloading " + userRepository.save(new User("Bilbo Baggins")));
             User frodoBaggins = new User("Frodo Baggins");
             log.info("Preloading " + userRepository.save(frodoBaggins));
+            Order order = new Order(frodoBaggins);
+            orderRepository.save(order);
             orderRepository.save(new Order(frodoBaggins));
-            orderRepository.save(new Order(frodoBaggins));
-            log.info("Preloading " + productRepository.save(new Product("молоко")));
-            log.info("Preloading " + productRepository.save(new Product("хлеб")));
+            Product milk = productRepository.save(new Product("молоко"));
+            Product bread = productRepository.save(new Product("хлеб"));
+            orderLineRepository.save(new OrderLine(order, milk, 2));
+            orderLineRepository.save(new OrderLine(order, bread, 1));
         };
     }
 }

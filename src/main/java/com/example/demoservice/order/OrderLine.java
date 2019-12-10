@@ -22,7 +22,7 @@ public class OrderLine {
     @JsonManagedReference
     private Order order;
     @ManyToOne(optional = false)
-    @NotEmpty(message = "Please provide a product")
+    @NotNull(message = "Please provide a product")
     private Product product;
     @NotNull(message = "Please provide a quantity")
     @DecimalMin("0.0")
