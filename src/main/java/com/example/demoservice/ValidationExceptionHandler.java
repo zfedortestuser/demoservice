@@ -15,7 +15,7 @@ public class ValidationExceptionHandler {
     @ResponseBody
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    String constraintViolationException(OrderNotFoundException ex) {
+    String constraintViolationException(ConstraintViolationException ex) {
         return ex.getMessage();
     }
 }

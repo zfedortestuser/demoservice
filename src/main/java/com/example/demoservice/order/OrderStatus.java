@@ -13,9 +13,17 @@ public enum OrderStatus {
      */
     ACTUAL(true, true),
     /**
-     * Заказ завершён, запрещено добавление товаров, запрещено завершение заказа
+     * Заказ завершён(куплен), запрещено добавление товаров, запрещено завершение заказа
      */
-    FINISHED(false, false);
+    FINISHED(false, false),
+    /**
+     * Заказ отложен для выполнения позже
+     */
+    SCHEDULED_ONCE(false, false),
+    /**
+     * Заказ отложен для периодического выполнения
+     */
+    SCHEDULED_PERIODICALLY(false, false);
 
     private final boolean canAddLine;
     private final boolean canFinish;

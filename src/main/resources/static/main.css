@@ -1,0 +1,13 @@
+.entityContainer {
+    padding: 10px;
+    margin: 10px;
+}
+
+.reloadTableButton {
+    font-size: 7pt;
+    display:none;
+}
+
+#productContainer {
+    display:none;
+}

@@ -22,7 +22,7 @@ public class ProductController {
     @GetMapping("/products/{id}")
     Product one(@PathVariable Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException(id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @PostMapping("/products")
