@@ -29,6 +29,10 @@ public class Order {
      * Период для периодического заказа
      */
     private int delay;
+    /**
+     * true: периодический заказ, false: отложенный заказ
+     */
+    private boolean periodical;
 
     public Order() {
     }
@@ -83,5 +87,13 @@ public class Order {
 
     public void setDelay(int delay) {
         this.delay = delay;
+    }
+
+    public boolean isPeriodical() {
+        return periodical;
+    }
+
+    public void setPeriodical(boolean periodical) {
+        this.periodical = periodical;
     }
 }

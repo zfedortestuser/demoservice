@@ -2,21 +2,20 @@ package com.example.demoservice.order;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.transaction.Transactional;
 
 @Component
 public class OrderScheduler {
-    private static final Logger logger = LoggerFactory.getLogger(OrderScheduler.class);
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
-    public OrderScheduler(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public OrderScheduler(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @Scheduled(fixedRate = 5000)
+    @Transactional
     void processScheduledOrders() {
-        logger.debug("Processing scheduled orders...");
-        //orderRepository.
+        orderService.processScheduledOrders();
     }
 }

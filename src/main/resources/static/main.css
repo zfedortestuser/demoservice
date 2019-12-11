@@ -5,6 +5,13 @@
 
 .reloadTableButton {
     font-size: 7pt;
+}
+
+#userContainer .reloadTableButton {
+    display:none;
+}
+
+#logContainer .reloadTableButton {
     display:none;
 }
 

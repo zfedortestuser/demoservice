@@ -75,7 +75,7 @@ function createEntityContainers() {
                 ENTITIES[id].rows=json;
             });
         };
-        entityContainer.append($('<button/>').text('Загрузить').addClass('reloadTableButton').click(
+        entityContainer.append($('<button/>').text('Перечитать данные').addClass('reloadTableButton').click(
             ENTITIES[id].reloadFunction
         ));
         result.push(entityContainer);

@@ -6,6 +6,7 @@
     <script src="product.js"></script>
     <script src="user.js"></script>
     <script src="order.js"></script>
+    <script src="log.js"></script>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -16,6 +17,9 @@
 <script lang="javascript">
 $('#entities').append(createEntityContainers());
 $('button.reloadTableButton').trigger('click');
+setInterval(() => {
+  ENTITIES['log'].reloadFunction();
+}, 5000);
 </script>
 
 </body>

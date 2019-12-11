@@ -17,13 +17,9 @@ public enum OrderStatus {
      */
     FINISHED(false, false),
     /**
-     * Заказ отложен для выполнения позже
+     * Периодический или отложенный заказ
      */
-    SCHEDULED_ONCE(false, false),
-    /**
-     * Заказ отложен для периодического выполнения
-     */
-    SCHEDULED_PERIODICALLY(false, false);
+    SCHEDULED(false, false);
 
     private final boolean canAddLine;
     private final boolean canFinish;

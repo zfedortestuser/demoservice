@@ -97,7 +97,7 @@ function addProductsToOrder(order, productId, quantity) {
 
 function scheduleOnce(order, delay) {
     $.ajax({
-        url: "orders/"+order.id+"/scheduleOnce?delay="+delay,
+        url: "orders/"+order.id+"/schedule?periodical=false&delay="+delay,
         method: "POST",
         contentType: "application/json",
         data: [],
@@ -109,7 +109,7 @@ function scheduleOnce(order, delay) {
 
 function schedulePeriodically(order, delay) {
     $.ajax({
-        url: "orders/"+order.id+"/schedulePeriodically?delay="+delay,
+        url: "orders/"+order.id+"/schedule?periodical=true&delay="+delay,
         method: "POST",
         contentType: "application/json",
         data: [],

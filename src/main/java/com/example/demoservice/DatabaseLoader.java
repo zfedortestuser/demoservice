@@ -17,12 +17,12 @@ public class DatabaseLoader {
     CommandLineRunner initDatabase(UserRepository userRepository,
                                    ProductRepository productRepository) {
         return args -> {
-            log.info("Preloading " + userRepository.save(new User("Bilbo Baggins")));
-            log.info("Preloading " + userRepository.save(new User("Frodo Baggins")));
-            log.info("Preloading " + productRepository.save(new Product("milk")));
-            log.info("Preloading " + productRepository.save(new Product("bread")));
-            log.info("Preloading " + productRepository.save(new Product("огурцы")));
-            log.info("Preloading " + productRepository.save(new Product("помидоры")));
+            log.info("Preloading " + userRepository.save(new User("Бильбо")));
+            log.info("Preloading " + userRepository.save(new User("Фродо")));
+            log.info("Preloading " + productRepository.save(new Product("Молоко")));
+            log.info("Preloading " + productRepository.save(new Product("Хлеб")));
+            log.info("Preloading " + productRepository.save(new Product("Огурцы")));
+            log.info("Preloading " + productRepository.save(new Product("Помидоры")));
         };
     }
 }

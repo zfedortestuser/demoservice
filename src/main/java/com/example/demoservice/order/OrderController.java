@@ -89,15 +89,16 @@ public class OrderController {
     }
 
     @PostMapping("/orders/{id}/schedule")
-    Order scheduleOnce(@PathVariable Long id,
-                       @RequestParam() int delay,
-                       @RequestParam() boolean periodical) {
+    Order schedule(@PathVariable Long id,
+                   @RequestParam() int delay,
+                   @RequestParam() boolean periodical) {
         Order order = getOrder(id);
         if (!order.getStatus().isCanFinish()) {
             throw new InvalidOrderException("Cannot schedule order with status " + order.getStatus());
         }
-        order.setStatus(periodical ? OrderStatus.SCHEDULED_PERIODICALLY : OrderStatus.SCHEDULED_ONCE);
+        order.setStatus(OrderStatus.SCHEDULED);
         order.setDelay(delay);
+        order.setPeriodical(periodical);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, delay);
         order.setControlDate(calendar.getTime());
