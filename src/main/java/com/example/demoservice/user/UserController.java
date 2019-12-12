@@ -6,25 +6,19 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/users")
-    List<User> all() {
-        return userRepository.findAll();
+    List<User> findAll() {
+        return userService.findAll();
     }
 
     @GetMapping("/users/{id}")
-    User one(@PathVariable Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
-    }
-
-    @PostMapping("/users")
-    User create(@RequestBody User newUser) {
-        return userRepository.save(newUser);
+    User findById(@PathVariable long id) {
+        return userService.findById(id);
     }
 }

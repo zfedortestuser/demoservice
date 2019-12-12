@@ -8,25 +8,19 @@ import java.util.List;
 
 @RestController
 public class ProductController {
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("/products")
-    List<Product> all() {
-        return productRepository.findAll();
+    List<Product> findAll() {
+        return productService.findAll();
     }
 
     @GetMapping("/products/{id}")
-    Product one(@PathVariable Long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
-    }
-
-    @PostMapping("/products")
-    Product create(@Valid @RequestBody Product product) {
-        return productRepository.save(product);
+    Product findById(@PathVariable long id) {
+        return productService.findById(id);
     }
 }

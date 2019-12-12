@@ -1,7 +1,7 @@
 var ENTITIES = {};
 
 function isColumnVisible(columnName) {
-    return columnName !== 'id';
+    return true;// columnName !== 'id';
 }
 
 function createTable(data, actions) {

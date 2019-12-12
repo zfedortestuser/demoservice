@@ -19,7 +19,7 @@ public enum OrderStatus {
     /**
      * Периодический или отложенный заказ
      */
-    SCHEDULED(false, false);
+    SCHEDULED(false, true);
 
     private final boolean canAddLine;
     private final boolean canFinish;

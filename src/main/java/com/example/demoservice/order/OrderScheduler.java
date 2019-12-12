@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
+/**
+ * Класс для периодического запуска обработки отложенных/периодических заказов
+ */
 @Component
 public class OrderScheduler {
     private final OrderService orderService;

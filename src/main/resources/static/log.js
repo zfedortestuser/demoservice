@@ -1,5 +1,5 @@
 ENTITIES['log'] = {
-    name: 'Лог',
+    name: 'Лог выполнения заказов',
     url: 'logs',
     reloadFunction: null,
     rows: [],

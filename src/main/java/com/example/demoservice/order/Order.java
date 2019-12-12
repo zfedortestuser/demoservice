@@ -17,7 +17,7 @@ public class Order {
     @NotNull
     private User user;
     private OrderStatus status = OrderStatus.NEW;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @OrderBy("id")
     private List<OrderLine> lines;
     /**

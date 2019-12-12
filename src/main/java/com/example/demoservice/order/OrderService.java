@@ -1,49 +1,64 @@
 package com.example.demoservice.order;
 
-import com.example.demoservice.log.LogService;
-import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-@Component
-public class OrderService {
-    private final OrderRepository orderRepository;
-    private final LogService logService;
+/**
+ * Сервис для работы с заказами
+ */
+public interface OrderService {
+    /**
+     * Создать заказ для пользователя
+     *
+     * @param userId идентификатор пользователя
+     * @return новый заказ
+     */
+    Order createOrder(long userId);
 
-    public OrderService(OrderRepository orderRepository, LogService logService) {
-        this.orderRepository = orderRepository;
-        this.logService = logService;
-    }
+    /**
+     * Найти все заказы
+     *
+     * @return список всех заказов
+     */
+    List<Order> findAll();
 
-    @Transactional
-    public void processScheduledOrders() {
-        List<Order> orders = orderRepository.findScheduledOrders(OrderStatus.SCHEDULED, new Date());
-        if (!orders.isEmpty())
-            logService.log("Найдено {} ожидающих заказов", orders.size());
-        for (Order order : orders) {
-            StringBuilder sb = new StringBuilder("Выполняю ");
-            sb.append(order.isPeriodical() ? " периодический заказ " : "отложенный заказ ");
-            sb.append(" пользователя ");
-            sb.append(order.getUser().getName());
-            sb.append(", заказываю ");
-            for (OrderLine line : order.getLines()) {
-                sb.append(line.getProduct().getName());
-                sb.append(" в количестве ");
-                sb.append(line.getQuantity());
-                sb.append("шт. ");
-            }
-            logService.log(sb.toString());
-            if (order.isPeriodical()) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.SECOND, order.getDelay());
-                order.setControlDate(calendar.getTime());
-            } else {
-                order.setStatus(OrderStatus.FINISHED);
-            }
-            orderRepository.save(order);
-        }
-    }
+    /**
+     * Найти заказ по идентификатору
+     *
+     * @param id идентификатор заказа
+     * @return заказ
+     */
+    Order findById(long id);
+
+    /**
+     * Добавить товары в заказ
+     *
+     * @param orderId        идентификатор заказа
+     * @param productId идентификатор товара
+     * @param quantity  количество товара
+     * @return обновлённый заказ
+     */
+    OrderLine addProducts(long orderId, long productId, int quantity);
+
+    /**
+     * Завершить заказ
+     *
+     * @param id идентификатор заказа
+     * @return обновлённый заказ
+     */
+    Order finishOrder(long id);
+
+    /**
+     * Запланировать отложенное или периодическое выполнение заказа
+     *
+     * @param id         идентификатор заказа
+     * @param delay      сек. время задержки для отложенного заказа, периодичность для периодического заказа
+     * @param periodical true: периодический заказ, false: отложенный заказ
+     * @return обновлённый заказ
+     */
+    Order scheduleOrder(long id, int delay, boolean periodical);
+
+    /**
+     * Найти и обработать периодические и отложенные заказы
+     */
+    void processScheduledOrders();
 }
