@@ -1,6 +1,5 @@
 package com.example.demoservice;
 
-import com.example.demoservice.log.LogServiceImpl;
 import com.example.demoservice.product.Product;
 import com.example.demoservice.product.ProductRepository;
 import com.example.demoservice.user.User;
@@ -13,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DatabaseLoader {
-    private static final Logger logger = LoggerFactory.getLogger(LogServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseLoader.class);
     @Bean
     CommandLineRunner initDatabase(UserRepository userRepository,
                                    ProductRepository productRepository) {

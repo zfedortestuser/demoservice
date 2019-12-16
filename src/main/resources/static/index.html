@@ -16,9 +16,7 @@
 <script lang="javascript">
 $('#entities').append(createEntityContainers());
 $('button.reloadTableButton').trigger('click');
-setInterval(() => {
-  ENTITIES['log'].reloadFunction();
-}, 5000);
+setInterval( ENTITIES['log'].reloadFunction, 5000);
 </script>
 
 </body>
